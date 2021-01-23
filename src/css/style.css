@@ -1,0 +1,111 @@
+#rodape{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    border: lightgray 1px solid;            
+    -webkit-box-shadow: 0px 7px 5px 0px rgba(161,161,161,1);
+    -moz-box-shadow: 0px 7px 5px 0px rgba(161,161,161,1);
+    box-shadow: 0px 0px 5px 0px rgba(161,161,161,1);
+}
+
+html{
+    scroll-behavior: smooth;
+}
+.header{
+    display: flex;
+    align-items: center;
+    height: 100px;
+    border-bottom: lightgray 1px solid;
+    padding-left: 15%;
+    -webkit-box-shadow: 0px 7px 5px 0px rgba(161,161,161,1);
+    -moz-box-shadow: 0px 7px 5px 0px rgba(161,161,161,1);
+    box-shadow: 0px 0px 5px 0px rgba(161,161,161,1);
+}
+.esquerda{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+.espacoAcima{
+    margin-top: 5%;
+}
+.alturaTotal{
+    height:100%;
+}
+.corpoCartao{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.corpoCartao .card-title{
+    margin-top:5%;
+    margin-bottom: 5%;
+}
+section{
+    margin-bottom: 50px;
+}
+.conteudo{
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+.card{
+    border: 1px solid lightblue;
+    -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 2rem;
+    background-color: wheat;
+  }
+  
+
+  .header{
+    display: flex;
+    align-items: center;
+    height: 100px;
+    border-bottom: lightgray 1px solid;
+    padding-left: 15%;
+    -webkit-box-shadow: 0px 7px 5px 0px rgba(161,161,161,1);
+    -moz-box-shadow: 0px 7px 5px 0px rgba(161,161,161,1);
+    box-shadow: 0px 0px 5px 0px rgba(161,161,161,1);
+  }
+  .esquerda{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+  }
+  .espacoAcima{
+    margin-top: 5%;
+  }
+  .alturaTotal{
+    height:100%;
+  }
+  .corpoCartao{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+  .corpoCartao .card-title{
+    margin-top:5%;
+    margin-bottom: 5%;
+  }
+  .conteudo{
+    width: 100%;
+  }
+  .meuConteudo{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+  }
+  .form-group{
+      width: 80%;
+  }
