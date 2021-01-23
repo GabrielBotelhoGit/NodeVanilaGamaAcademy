@@ -1,3 +1,36 @@
+import baseURL from '../../service/baseUrl.js';
+
+window.LoginUser = async () =>{    
+
+    try{        
+        const RegisterData = {
+            email: document.getElementById("email").value,
+            password: document.getElementById("senha").value
+        }
+    
+        const options = {
+            method:"POST",
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(RegisterData)
+        };
+
+        const response = await fetch(baseURL, options)
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                sessionStorage.setItem("token",data.token);    
+                localStorage.setItem("token", data.token);                
+                window.chamaLogin();
+            });
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
 let Login = {
     render: async () => {
 
@@ -34,10 +67,10 @@ let Login = {
                                     </div>
                                     <div class="form-group">
                                         <label for="senha">Senha</label>
-                                        <input type="password" class="form-control">
+                                        <input type="password" id="senha" class="form-control">
                                     </div>                        
                                     <br>
-                                    <button type="button" onclick="chamaLogin()" class="btn btn-primary">Clique aqui para logar</button>
+                                    <button type="button" onclick="LoginUser()" class="btn btn-primary">Clique aqui para logar</button>
                                     <br>
                                     <a href="#/signup">Ou clique aqui para fazer SignUp</a>
                                 </form>

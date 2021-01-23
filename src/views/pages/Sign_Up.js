@@ -1,11 +1,14 @@
 import baseURL from '../../service/baseUrl.js';
 
-window.postRegisterNewUser = async () =>{    
+document.postRegisterNewUser = async () =>{    
 
     try{        
         const RegisterData = {
-            email: document.getElementById("email").value,
-            password: document.getElementById("senha").value
+            cpf: document.getElementById("cpf").value,
+            //id:0,
+            nome: document.getElementById("nome").value,
+            login: document.getElementById("email").value,
+            senha: document.getElementById("senha").value
         }
     
         const options = {
@@ -16,16 +19,26 @@ window.postRegisterNewUser = async () =>{
             body: JSON.stringify(RegisterData)
         };
 
-        const response = await fetch(baseURL, options)
-            .then((res) => res.json())
-            .then((data) => window.chamaLogin());
+        const response = await fetch(baseURL + "usuarios", options)
+            .then((res) => {
+                if(res.status == 200){
+                    document.chamaLogin()
+                }
+                else{
+                    alert("err");
+                }
+            })
+            // .then((data) => {
+                
+            //     document.chamaLogin()
+            // });
     }
     catch(err){
         console.log(err);
     }
 }
 
-window.chamaLogin = function (){
+document.chamaLogin = function (){
     let email = document.getElementById("email").value;
     sessionStorage.setItem("logado",true);
     sessionStorage.setItem("usuario", email);
@@ -33,8 +46,7 @@ window.chamaLogin = function (){
 };
 
 let home = {
-    render: async () => {
-        let postData = postRegisterNewUser()
+    render: async () => {        
         let view = `
             <div class="row d-flex justify-content-center">                                
                 <div class="col-md-8">
@@ -48,9 +60,21 @@ let home = {
                                         <input type="email" id="email" class="form-control">                            
                                     </div>
                                     <div class="form-group">
+                                        <label for="exampleInputEmail1">Seu nome</label>
+                                        <input type="email" id="nome" class="form-control">                            
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Seu cpf</label>
+                                        <input type="email" id="cpf" class="form-control">                            
+                                    </div>
+                                    <div class="form-group">
                                         <label for="senha">Senha</label>
                                         <input type="password" id="senha" class="form-control">
-                                    </div>                        
+                                    </div>                  
+                                    <div class="form-group">
+                                        <label for="senha">Confirmar Senha</label>
+                                        <input type="password" id="confirmarSenha" class="form-control">
+                                    </div>           
                                     <br>
                                     <button type="button" onclick="postRegisterNewUser()" class="btn btn-primary">Sign In</button>
                                 </form>
