@@ -1,30 +1,39 @@
 import baseURL from '../../service/baseUrl.js';
+import Auth from '../../service/Auth.js';
 
 window.LoginUser = async () =>{    
 
     try{        
-        const RegisterData = {
-            email: document.getElementById("email").value,
-            password: document.getElementById("senha").value
+        const RegisterData = {            
+            login: document.getElementById("email").value,
+            senha: document.getElementById("senha").value,            
+        }  
+        let errorMessage,
+            validForm = true;      
+        
+        if (RegisterData.senha.length < 6 ){
+            errorMessage+= 'Senha: A senha precisa ter pelo menos 6 dígitos!\n'
+            validForm = false
         }
-    
-        const options = {
-            method:"POST",
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(RegisterData)
-        };
+        if (!validForm){
+            alert( errorMessage )
+        }else{
 
-        const response = await fetch(baseURL, options)
-            .then((res) => {
-                return res.json();
+            axios.post(baseURL + "login",{                
+                usuario: RegisterData.login,                
+                senha: RegisterData.senha
+            }).then( res => {
+                if (res.status == 200 ){                    
+                    Auth.chargeSession(res.data.token, RegisterData.login);                                        
+                    window.location.replace("#/home");
+                }
+                else{
+                    alert(err)
+                }
+                
+
             })
-            .then((data) => {
-                sessionStorage.setItem("token",data.token);    
-                localStorage.setItem("token", data.token);                
-                window.chamaLogin();
-            });
+        }
     }
     catch(err){
         console.log(err);
@@ -33,13 +42,6 @@ window.LoginUser = async () =>{
 
 let Login = {
     render: async () => {
-
-        window.chamaLogin = function (){
-            let email = document.getElementById("email").value;
-            sessionStorage.setItem("logado",true);
-            sessionStorage.setItem("usuario", email);
-            window.location.replace("#/home");
-        };
         
         let view = `
             <div class="row">
@@ -83,7 +85,8 @@ let Login = {
         `;
         return view;
     },
-    after_render: async () => {        
+    after_render: async () => {    
+        Auth.clearSession();
     }
 }
 export default Login;

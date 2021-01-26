@@ -1,3 +1,5 @@
+import Auth from '../../service/Auth.js';
+
 let header = {
     render: async () => {
         let view = `
@@ -10,6 +12,9 @@ let header = {
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" id="login" href="#/">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="logout" href="#/">Logout</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="home" href="#/home">Home <span class="sr-only">(current)</span></a>
@@ -27,21 +32,30 @@ let header = {
         let url = window.location.hash;
         if(url.indexOf("dash") > -1){
             document.getElementById("dashboard").parentElement.classList.add("active");
+            document.getElementById("login").parentElement.classList.add("escondido");
+            document.getElementById("logout").parentElement.classList.remove("escondido");
         }
         else if(url.indexOf("home") > -1){
             document.getElementById("home").parentElement.classList.add("active");
+            document.getElementById("login").parentElement.classList.add("escondido");
+            document.getElementById("logout").parentElement.classList.remove("escondido");
         }
         else{
             document.getElementById("login").parentElement.classList.add("active");
-            sessionStorage.removeItem("logado");
-            sessionStorage.removeItem("usuario");
+            document.getElementById("login").parentElement.classList.remove("escondido");
+            document.getElementById("logout").parentElement.classList.add("escondido");
+            Auth.clearSession();
         }
 
-        let logado = sessionStorage.getItem("logado");
-        if(!logado){
+        let autenticado = Auth.isAuthenticated();
+        if(!autenticado){
             document.getElementById("home").classList.add("disabled");
             document.getElementById("dashboard").classList.add("disabled");
         }        
+        else{
+            document.getElementById("dashboard").parentElement.classList.add("active");
+            document.getElementById("home").parentElement.classList.add("active");
+        }
     }
 }
 export default header;

@@ -109,3 +109,13 @@ section{
   .form-group{
       width: 80%;
   }
+
+  .escondido{
+    display: none;
+  }
+
+footer {
+  position:absolute;
+  bottom:0;
+  width:100%;
+}
